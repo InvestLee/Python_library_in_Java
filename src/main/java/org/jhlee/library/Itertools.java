@@ -1,51 +1,163 @@
 package org.jhlee.library;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.*;
 
 
 public class Itertools {
-
-    public static List<Integer> accumulatePlus(List<Integer> list, Integer initial){
-        Integer[] result = new Integer[list.size()+1];
-        result[0] = initial;
-        for(int i = 1; i < result.length; i++){
-            result[i] = list.get(i-1);
-            result[i] += result[i-1];
+    public static<N> List<N> accumulatePlus(List<N> list, N initial){
+        if(!(initial instanceof  Number)){
+            throw new IllegalArgumentException("The initial value must be a number.");
         }
-        return Arrays.asList(result);
+        List<N> result = new ArrayList<>(list.size()+1);
+        result.add(initial);
+        Number acc = (Number) initial;
+        for(Object value : list) {
+            if(!(value instanceof  Number)){
+                throw new IllegalArgumentException("The list value must be a number.");
+            }
+            if(value instanceof Integer) {
+                acc = acc.intValue() + (Integer) value;
+            } else if(value instanceof Double) {
+                acc = acc.doubleValue() + (Double) value;
+            } else if(value instanceof Float) {
+                acc = acc.floatValue() + (Float) value;
+            } else if(value instanceof Long) {
+                acc = acc.longValue() + (Long) value;
+            } else if(value instanceof Byte) {
+                acc = acc.byteValue() + (Byte) value;
+            } else if(value instanceof Short) {
+                acc = acc.shortValue() + (Short) value;
+            } else if(value instanceof BigDecimal) {
+                acc = new BigDecimal(acc.toString()).add((BigDecimal) value);
+            }
+            result.add((N) acc);
+        }
+        return result;
     }
 
-    public static List<Float> accumulatePlus(List<Float> list, Float initial){
-        Float[] result = new Float[list.size()+1];
-        result[0] = initial;
-        for(int i = 1; i < result.length; i++){
-            result[i] = list.get(i-1);
-            result[i] += result[i-1];
+    public static<N> List<N> accumulateMultiply(List<N> list, N initial){
+        if(!(initial instanceof  Number)){
+            throw new IllegalArgumentException("The initial value must be a number.");
         }
-        return Arrays.asList(result);
+        List<N> result = new ArrayList<>(list.size()+1);
+        result.add(initial);
+        Number acc = (Number) initial;
+        for(Object value : list) {
+            if(!(value instanceof  Number)){
+                throw new IllegalArgumentException("The list value must be a number.");
+            }
+            if(value instanceof Integer) {
+                acc = acc.intValue() * (Integer) value;
+            } else if(value instanceof Double) {
+                acc = acc.doubleValue() * (Double) value;
+            } else if(value instanceof Float) {
+                acc = acc.floatValue() * (Float) value;
+            } else if(value instanceof Long) {
+                acc = acc.longValue() * (Long) value;
+            } else if(value instanceof Byte) {
+                acc = acc.byteValue() * (Byte) value;
+            } else if(value instanceof Short) {
+                acc = acc.shortValue() * (Short) value;
+            } else if(value instanceof BigDecimal) {
+                acc = new BigDecimal(acc.toString()).multiply((BigDecimal) value);
+            }
+            result.add((N) acc);
+        }
+        return result;
     }
 
-    public static List<Long> accumulatePlus(List<Long> list, Long initial){
-        Long[] result = new Long[list.size()+1];
-        result[0] = initial;
-        for(int i = 1; i < result.length; i++){
-            result[i] = list.get(i-1);
-            result[i] += result[i-1];
+    public static<N> List<N> accumulateMinus(List<N> list, N initial){
+        if(!(initial instanceof  Number)){
+            throw new IllegalArgumentException("The initial value must be a number.");
         }
-        return Arrays.asList(result);
+        List<N> result = new ArrayList<>(list.size()+1);
+        result.add(initial);
+        Number acc = (Number) initial;
+        for(Object value : list) {
+            if(!(value instanceof  Number)){
+                throw new IllegalArgumentException("The list value must be a number.");
+            }
+            if(value instanceof Integer) {
+                acc = acc.intValue() - (Integer) value;
+            } else if(value instanceof Double) {
+                acc = acc.doubleValue() - (Double) value;
+            } else if(value instanceof Float) {
+                acc = acc.floatValue() - (Float) value;
+            } else if(value instanceof Long) {
+                acc = acc.longValue() - (Long) value;
+            } else if(value instanceof Byte) {
+                acc = acc.byteValue() - (Byte) value;
+            } else if(value instanceof Short) {
+                acc = acc.shortValue() - (Short) value;
+            } else if(value instanceof BigDecimal) {
+                acc = new BigDecimal(acc.toString()).subtract((BigDecimal) value);
+            }
+            result.add((N) acc);
+        }
+        return result;
     }
 
-    public static List<Double> accumulatePlus(List<Double> list, Double initial){
-        Double[] result = new Double[list.size()+1];
-        result[0] = initial;
-        for(int i = 1; i < result.length; i++){
-            result[i] = list.get(i-1);
-            result[i] += result[i-1];
+    public static<N> List<N> accumulateDivide(List<N> list, N initial){
+        if(!(initial instanceof  Number)){
+            throw new IllegalArgumentException("The initial value must be a number.");
         }
-        return Arrays.asList(result);
+        List<N> result = new ArrayList<>(list.size()+1);
+        result.add(initial);
+        Number acc = (Number) initial;
+        for(Object value : list) {
+            if(!(value instanceof  Number)){
+                throw new IllegalArgumentException("The list value must be a number.");
+            }
+            if(value instanceof Integer) {
+                acc = acc.intValue() / (Integer) value;
+            } else if(value instanceof Double) {
+                acc = acc.doubleValue() / (Double) value;
+            } else if(value instanceof Float) {
+                acc = acc.floatValue() / (Float) value;
+            } else if(value instanceof Long) {
+                acc = acc.longValue() / (Long) value;
+            } else if(value instanceof Byte) {
+                acc = acc.byteValue() / (Byte) value;
+            } else if(value instanceof Short) {
+                acc = acc.shortValue() / (Short) value;
+            } else if(value instanceof BigDecimal) {
+                acc = new BigDecimal(acc.toString()).divide((BigDecimal) value);
+            }
+            result.add((N) acc);
+        }
+        return result;
+    }
+
+    public static<N> List<N> accumulateRemain(List<N> list, N initial){
+        if(!(initial instanceof  Number)){
+            throw new IllegalArgumentException("The initial value must be a number.");
+        }
+        List<N> result = new ArrayList<>(list.size()+1);
+        result.add(initial);
+        Number acc = (Number) initial;
+        for(Object value : list) {
+            if(!(value instanceof  Number)){
+                throw new IllegalArgumentException("The list value must be a number.");
+            }
+            if(value instanceof Integer) {
+                acc = acc.intValue() % (Integer) value;
+            } else if(value instanceof Double) {
+                acc = acc.doubleValue() % (Double) value;
+            } else if(value instanceof Float) {
+                acc = acc.floatValue() % (Float) value;
+            } else if(value instanceof Long) {
+                acc = acc.longValue() % (Long) value;
+            } else if(value instanceof Byte) {
+                acc = acc.byteValue() % (Byte) value;
+            } else if(value instanceof Short) {
+                acc = acc.shortValue() % (Short) value;
+            } else if(value instanceof BigDecimal) {
+                acc = new BigDecimal(acc.toString()).remainder((BigDecimal) value);
+            }
+            result.add((N) acc);
+        }
+        return result;
     }
 
     public static<T> List<List<T>> permutations(List<T> list, int r){
@@ -127,9 +239,123 @@ public class Itertools {
         return result;
     }
 
-    public static Iterable<Integer> count(int start, int step){
-        return () -> new Iterator<>() {
-            int result = start - step;
+    public static<N> Iterable<N> count(N start, N step){
+        if(!(start instanceof  Number)){
+            throw new IllegalArgumentException("The start value must be a number.");
+        }
+        if(!(step instanceof  Number)){
+            throw new IllegalArgumentException("The step value must be a number.");
+        }
+
+        if(start instanceof Integer && step instanceof Integer) {
+            return () -> new Iterator() {
+                int result = (Integer) start - (Integer) step;
+
+                @Override
+                public boolean hasNext() {
+                    return true;
+                }
+
+                @Override
+                public Integer next() {
+                    result += (Integer) step;
+                    return result;
+                }
+            };
+        } else if(start instanceof Double && step instanceof Double) {
+            return () -> new Iterator() {
+                double result = (Double) start - (Double) step;
+
+                @Override
+                public boolean hasNext() {
+                    return true;
+                }
+
+                @Override
+                public Double next() {
+                    result += (Double) step;
+                    return result;
+                }
+            };
+        } else if(start instanceof Float && step instanceof Float) {
+            return () -> new Iterator() {
+                float result = (Float) start - (Float) step;
+
+                @Override
+                public boolean hasNext() {
+                    return true;
+                }
+
+                @Override
+                public Float next() {
+                    result += (Float) step;
+                    return result;
+                }
+            };
+        } else if(start instanceof Long && step instanceof Long) {
+            return () -> new Iterator() {
+                long result = (Long) start - (Long) step;
+
+                @Override
+                public boolean hasNext() {
+                    return true;
+                }
+
+                @Override
+                public Long next() {
+                    result += (Long) step;
+                    return result;
+                }
+            };
+        } else if(start instanceof Byte && step instanceof Byte) {
+            return () -> new Iterator() {
+                byte result = (byte) ((Byte) start - (Byte) step);
+
+                @Override
+                public boolean hasNext() {
+                    return true;
+                }
+
+                @Override
+                public Byte next() {
+                    result += (Byte) step;
+                    return result;
+                }
+            };
+        } else if(start instanceof Short && step instanceof Short) {
+            return () -> new Iterator() {
+                short result = (short) ((Short) start - (Short) step);
+
+                @Override
+                public boolean hasNext() {
+                    return true;
+                }
+
+                @Override
+                public Short next() {
+                    result += (Short) step;
+                    return result;
+                }
+            };
+        } else if(start instanceof BigDecimal && step instanceof BigDecimal) {
+            return () -> new Iterator() {
+                BigDecimal result = new BigDecimal(start.toString()).subtract((BigDecimal) step);
+
+                @Override
+                public boolean hasNext() {
+                    return true;
+                }
+
+                @Override
+                public BigDecimal next() {
+                    result = result.add((BigDecimal) step);
+                    return result;
+                }
+            };
+        }
+
+        return () -> new Iterator() {
+            String result = "The start & step value must be a number.";
 
             @Override
             public boolean hasNext() {
@@ -137,59 +363,7 @@ public class Itertools {
             }
 
             @Override
-            public Integer next() {
-                result += step;
-                return result;
-            }
-        };
-    }
-
-    public static Iterable<Float> count(float start, float step){
-        return () -> new Iterator<>() {
-            float result = start - step;
-
-            @Override
-            public boolean hasNext() {
-                return true;
-            }
-
-            @Override
-            public Float next() {
-                result += step;
-                return result;
-            }
-        };
-    }
-
-    public static Iterable<Long> count(long start, long step){
-        return () -> new Iterator<>() {
-            long result = start - step;
-
-            @Override
-            public boolean hasNext() {
-                return true;
-            }
-
-            @Override
-            public Long next() {
-                result += step;
-                return result;
-            }
-        };
-    }
-
-    public static Iterable<Double> count(double start, double step){
-        return () -> new Iterator<>() {
-            double result = start - step;
-
-            @Override
-            public boolean hasNext() {
-                return true;
-            }
-
-            @Override
-            public Double next() {
-                result += step;
+            public String next() {
                 return result;
             }
         };
