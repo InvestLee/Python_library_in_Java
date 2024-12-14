@@ -264,4 +264,26 @@ public class ItertoolsTest {
             comp++;
         }
     }
+
+    @Test
+    @DisplayName("compress 함수")
+    public void compressTest() {
+        List<String> arr = new ArrayList<>(Arrays.asList("A","B","C","D","E","F"));
+        boolean[] selectors = {true,false,true,false,true,true};
+        List<String> result = Itertools.compress(arr,selectors);
+        List<String> comp = new ArrayList<>(Arrays.asList("A","C","E","F"));
+        assertEquals(comp, result);
+    }
+
+    @Test
+    @DisplayName("cycle 함수")
+    public void cycleTest() {
+        List<String> arr = new ArrayList<>(Arrays.asList("A","B","C","D"));
+        int count = 0;
+        for (String result : Itertools.cycle(arr)) {
+            assertEquals(arr.get(count % 4), result);
+            count++;
+            if(count > 10) break;
+        }
+    }
 }

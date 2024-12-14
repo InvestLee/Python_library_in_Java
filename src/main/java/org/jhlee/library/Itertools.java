@@ -299,6 +299,19 @@ public class Itertools {
         return result;
     }
 
+    public static<T> List<T> compress(List<T> list, boolean[] selectors){
+        if(list.size() != selectors.length){
+            throw new IllegalArgumentException("The sizes of list and selectors must be the same.");
+        }
+        List<T> result = new ArrayList<>();
+        for(int i = 0; i < list.size(); i++){
+            if(selectors[i]){
+                result.add(list.get(i));
+            }
+        }
+        return result;
+    }
+
     public static<N> Iterable<N> count(N start, N step){
         if(!(start instanceof  Number)){
             throw new IllegalArgumentException("The start value must be a number.");
@@ -425,6 +438,27 @@ public class Itertools {
             @Override
             public String next() {
                 return result;
+            }
+        };
+    }
+
+    public static<T> Iterable<T> cycle(List<T> list){
+        if(list.size() == 0){
+            throw new IllegalArgumentException("The list size must be greater than 0.");
+        }
+
+        return () -> new Iterator() {
+            int count = -1;
+            @Override
+            public boolean hasNext() {
+                count++;
+                if(count > list.size() - 1) count = 0;
+                return true;
+            }
+
+            @Override
+            public T next() {
+                return list.get(count);
             }
         };
     }
