@@ -286,4 +286,28 @@ public class ItertoolsTest {
             if(count > 10) break;
         }
     }
+
+    @Test
+    @DisplayName("dropWhile 함수")
+    public void dropWhileTest() {
+        List<Integer> arr = new ArrayList<>(Arrays.asList(1,4,6,4,1));
+        int[] comp = {6,4,1};
+        int idx = 0;
+        for (Integer result : Itertools.dropWhile(integer -> (integer < 5),arr)) {
+            assertEquals(comp[idx], result);
+            idx++;
+        }
+    }
+
+    @Test
+    @DisplayName("filterFalse 함수")
+    public void filterFalseTest() {
+        List<Integer> arr = new ArrayList<>(Arrays.asList(0,1,2,3,4,5,6,7,8,9));
+        int[] comp = {0,2,4,6,8};
+        int idx = 0;
+        for (Integer result : Itertools.filterFalse(integer -> (integer % 2 == 0),arr)) {
+            assertEquals(comp[idx], result);
+            idx++;
+        }
+    }
 }

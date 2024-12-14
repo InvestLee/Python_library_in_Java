@@ -2,6 +2,7 @@ package org.jhlee.library;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.function.Predicate;
 
 
 public class Itertools {
@@ -448,17 +449,67 @@ public class Itertools {
         }
 
         return () -> new Iterator() {
-            int count = -1;
+            int idx = -1;
             @Override
             public boolean hasNext() {
-                count++;
-                if(count > list.size() - 1) count = 0;
+                idx++;
+                if(idx > list.size() - 1) idx = 0;
                 return true;
             }
 
             @Override
             public T next() {
-                return list.get(count);
+                return list.get(idx);
+            }
+        };
+    }
+
+    public static <T> Iterable<T> dropWhile(Predicate<T> condition, List<T> list) {
+        if(list.size() == 0){
+            throw new IllegalArgumentException("The list size must be greater than 0.");
+        }
+
+        return () -> new Iterator<T>() {
+            int idx = -1;
+            boolean flag = false;
+
+            @Override
+            public boolean hasNext() {
+                idx++;
+                while (!flag && idx < list.size() && condition.test(list.get(idx))) {
+                    idx++;
+                }
+                flag = true;
+                return idx < list.size();
+            }
+
+            @Override
+            public T next() {
+                return list.get(idx);
+            }
+        };
+    }
+
+    public static <T> Iterable<T> filterFalse(Predicate<T> condition, List<T> list) {
+        if(list.size() == 0){
+            throw new IllegalArgumentException("The list size must be greater than 0.");
+        }
+
+        return () -> new Iterator<T>() {
+            int idx = -1;
+
+            @Override
+            public boolean hasNext() {
+                idx++;
+                while (idx < list.size() && !condition.test(list.get(idx))) {
+                    idx++;
+                }
+                return idx < list.size();
+            }
+
+            @Override
+            public T next() {
+                return list.get(idx);
             }
         };
     }
