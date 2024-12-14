@@ -513,4 +513,31 @@ public class Itertools {
             }
         };
     }
+
+    public static<T> List<T> groupBy(List<T> list){
+        if(list.size() == 0){
+            throw new IllegalArgumentException("The list size must be greater than 0.");
+        }
+
+        List<T> result = new ArrayList<>();
+        result.add(list.get(0));
+        for(int i = 1; i < list.size(); i++){
+            if(!list.get(i).equals(list.get(i-1))){
+                result.add(list.get(i));
+            }
+        }
+        return result;
+    }
+
+    public static<T> List<T> iSlice(List<T> list, int start, int end, int step){
+        if(list.size() == 0){
+            throw new IllegalArgumentException("The list size must be greater than 0.");
+        }
+
+        List<T> result = new ArrayList<>();
+        for(int i = start; i < end; i += step){
+            result.add(list.get(i));
+        }
+        return result;
+    }
 }

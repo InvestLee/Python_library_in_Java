@@ -310,4 +310,39 @@ public class ItertoolsTest {
             idx++;
         }
     }
+
+    @Test
+    @DisplayName("groupBy 함수")
+    public void groupByTest() {
+        List<String> arr = new ArrayList<>(Arrays.asList("A","A","A","A","B","B","B","C","C","D","B"));
+        List<String> result = Itertools.groupBy(arr);
+        List<String> comp = new ArrayList<>(Arrays.asList("A","B","C","D","B"));
+        assertEquals(comp, result);
+
+        List<Integer> arr2 = new ArrayList<>(Arrays.asList(0,0,1,1,1,2,2,3,3,1));
+        List<Integer> result2 = Itertools.groupBy(arr2);
+        List<Integer> comp2 = new ArrayList<>(Arrays.asList(0,1,2,3,1));
+        assertEquals(comp2, result2);
+    }
+
+    @Test
+    @DisplayName("iSlice 함수")
+    public void iSliceTest() {
+        List<String> arr = new ArrayList<>(Arrays.asList("A","B","C","D","E","F","G"));
+        List<String> result = Itertools.iSlice(arr,0,2,1);
+        List<String> comp = new ArrayList<>(Arrays.asList("A","B"));
+        assertEquals(comp, result);
+
+        result = Itertools.iSlice(arr,2,4,1);
+        comp = new ArrayList<>(Arrays.asList("C","D"));
+        assertEquals(comp, result);
+
+        result = Itertools.iSlice(arr,2,arr.size(),1);
+        comp = new ArrayList<>(Arrays.asList("C","D","E","F","G"));
+        assertEquals(comp, result);
+
+        result = Itertools.iSlice(arr,0,arr.size(),2);
+        comp = new ArrayList<>(Arrays.asList("A","C","E","G"));
+        assertEquals(comp, result);
+    }
 }
