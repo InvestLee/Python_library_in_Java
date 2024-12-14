@@ -5,6 +5,35 @@ import java.util.*;
 
 
 public class Itertools {
+
+    public static Iterable<String> chain(List<String> list){
+        int size = 0;
+        for(String word : list){
+            size += word.length();
+        }
+        int totalSize = size;
+        return () -> new Iterator() {
+            int count = -1;
+            int listIdx = 0;
+            int wordIdx = -1;
+            @Override
+            public boolean hasNext() {
+                count++;
+                return count < totalSize;
+            }
+
+            @Override
+            public String next() {
+                wordIdx++;
+                if(wordIdx >= list.get(listIdx).length()){
+                    wordIdx = 0;
+                    listIdx++;
+                }
+                return Character.toString(list.get(listIdx).charAt(wordIdx));
+            }
+        };
+    }
+
     public static<N> List<N> accumulatePlus(List<N> list, N initial){
         if(!(initial instanceof  Number)){
             throw new IllegalArgumentException("The initial value must be a number.");
@@ -227,6 +256,37 @@ public class Itertools {
                     indices[i]++;
                     for(int j = i+1; j < r; j++){
                         indices[j] = indices[j-1] + 1;
+                    }
+                    element = new ArrayList<>();
+                    for(int j = 0; j < r; j++)  element.add(list.get(indices[j]));
+                    result.add(element);
+                    break;
+                }
+                if(i == 0) flag = false;
+            }
+        }
+        return result;
+    }
+
+    public static<T> List<List<T>> combinationsWithReplacement(List<T> list, int r){
+        int n = list.size();
+        if(r < 1 || n < 1){
+            List<List<T>> mistake = new ArrayList<>();
+            mistake.add((List<T>) new ArrayList<>(Arrays.asList("list size and r must be greater than 0.")));
+            return mistake;
+        }
+        int[] indices = new int[r];
+        List<List<T>> result = new ArrayList<>();
+        List<T> element = new ArrayList<>();
+        for(int i = 0; i < r; i++)  element.add(list.get(indices[i]));
+        result.add(element);
+        boolean flag = true;
+        while(flag){
+            for(int i = r-1; i >= 0; i--){
+                if(indices[i] != n - 1){
+                    int next = indices[i]+1;
+                    for(int j = i; j < r; j++){
+                        indices[j] = next;
                     }
                     element = new ArrayList<>();
                     for(int j = 0; j < r; j++)  element.add(list.get(indices[j]));

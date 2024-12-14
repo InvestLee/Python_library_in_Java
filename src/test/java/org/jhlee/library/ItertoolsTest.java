@@ -100,6 +100,21 @@ public class ItertoolsTest {
     }
 
     @Test
+    @DisplayName("combinationsWithReplacement 함수")
+    public void combinationsWithReplacementTest() {
+        List<String> arr = new ArrayList<>(Arrays.asList("A","B","C"));
+        List<List<String>> result = Itertools.combinationsWithReplacement(arr,2);
+        List<List<String>> comp = new ArrayList<>();
+        comp.add(Arrays.asList("A","A"));
+        comp.add(Arrays.asList("A","B"));
+        comp.add(Arrays.asList("A","C"));
+        comp.add(Arrays.asList("B","B"));
+        comp.add(Arrays.asList("B","C"));
+        comp.add(Arrays.asList("C","C"));
+        assertEquals(comp, result);
+    }
+
+    @Test
     @DisplayName("accumulatePlus 함수")
     public void accumulatePlusTest() {
         List<Integer> arr = new ArrayList<>(Arrays.asList(1,2,3,4,5));
@@ -237,5 +252,16 @@ public class ItertoolsTest {
         List<Integer> result5 = Itertools.accumulateRemain(arr5,123);
         List<Integer> comp5 = new ArrayList<>(Arrays.asList(123,23,3,0));
         assertEquals(comp5, result5);
+    }
+
+    @Test
+    @DisplayName("chain 함수")
+    public void chainTest() {
+        List<String> arr = new ArrayList<>(Arrays.asList("ABC","DEFG"));
+        char comp = 'A';
+        for (String result : Itertools.chain(arr)) {
+            assertEquals(Character.toString(comp), result);
+            comp++;
+        }
     }
 }
