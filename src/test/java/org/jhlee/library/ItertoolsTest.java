@@ -345,4 +345,61 @@ public class ItertoolsTest {
         comp = new ArrayList<>(Arrays.asList("A","C","E","G"));
         assertEquals(comp, result);
     }
+
+    @Test
+    @DisplayName("product 함수")
+    public void productTest() {
+        List<String> result = Itertools.product(Arrays.asList("A","B","C","D"), Arrays.asList("x","y"));
+        List<String> comp = new ArrayList<>(Arrays.asList("Ax", "Ay", "Bx", "By", "Cx", "Cy", "Dx", "Dy"));
+        assertEquals(comp, result);
+
+        List<String> result2 = Itertools.product(Arrays.asList("0","1"), 3);
+        List<String> comp2 = new ArrayList<>(Arrays.asList("000", "001", "010", "011", "100", "101", "110", "111"));
+        assertEquals(comp2, result2);
+    }
+
+    @Test
+    @DisplayName("repeat 함수")
+    public void repeatTest() {
+        int  comp= 10;
+        for (int result : Itertools.repeat(10, 3)) {
+            assertEquals(comp, result);
+        }
+    }
+
+    @Test
+    @DisplayName("takeWhile 함수")
+    public void takeWhileTest() {
+        List<Integer> arr = new ArrayList<>(Arrays.asList(1,4,6,4,1));
+        int[] comp = {1,4};
+        int idx = 0;
+        for (Integer result : Itertools.takeWhile(integer -> (integer < 5),arr)) {
+            assertEquals(comp[idx], result);
+            idx++;
+        }
+    }
+
+    @Test
+    @DisplayName("tee 함수")
+    public void teeTest() {
+        List<String> arr = new ArrayList<>(Arrays.asList("ABC","DEFG"));
+        char comp = 'A';
+        for (String result : Itertools.tee(arr,3)) {
+            assertEquals(Character.toString(comp), result);
+            comp++;
+            if(comp == 'H') comp = 'A';
+        }
+    }
+
+    @Test
+    @DisplayName("zipLongest 함수")
+    public void zipLongestTest() {
+        List<String> result = Itertools.zipLongest(Arrays.asList("A","B","C","D"), Arrays.asList("x","y"), "-");
+        List<String> comp = new ArrayList<>(Arrays.asList("Ax", "By", "C-", "D-"));
+        assertEquals(comp, result);
+
+        List<String> result2 = Itertools.zipLongest(Arrays.asList("A","B","C","D"), "-");
+        List<String> comp2 = new ArrayList<>(Arrays.asList("A-", "B-", "C-", "D-"));
+        assertEquals(comp2, result2);
+    }
 }

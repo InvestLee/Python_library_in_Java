@@ -540,4 +540,134 @@ public class Itertools {
         }
         return result;
     }
+
+    public static List<String> product(List<String> listA, List<String> listB){
+        if(listA.size() == 0 || listB.size() == 0){
+            throw new IllegalArgumentException("The listA and listB size must be greater than 0.");
+        }
+
+        List<String> result = new ArrayList<>();
+        for(int i = 0; i < listA.size(); i++){
+            for(int j = 0; j < listB.size(); j++){
+                result.add(listA.get(i)+listB.get(j));
+            }
+        }
+        return result;
+    }
+
+    public static List<String> product(List<String> list, int repeat){
+        if(list.size() == 0){
+            throw new IllegalArgumentException("The list size must be greater than 0.");
+        }
+
+        List<String> result = list;
+        for(int i = 1; i < repeat; i++){
+            result = product(result, list);
+        }
+        return result;
+    }
+
+    public static<T> Iterable<T> repeat(T obj, int times){
+        return () -> new Iterator() {
+            int count = -1;
+            @Override
+            public boolean hasNext() {
+                count++;
+                return count < times;
+            }
+
+            @Override
+            public T next() {
+                return obj;
+            }
+        };
+    }
+
+    public static <T> Iterable<T> takeWhile(Predicate<T> condition, List<T> list) {
+        if(list.size() == 0){
+            throw new IllegalArgumentException("The list size must be greater than 0.");
+        }
+
+        return () -> new Iterator<T>() {
+            int idx = -1;
+
+            @Override
+            public boolean hasNext() {
+                idx++;
+                if (condition.test(list.get(idx))) {
+                    idx = list.size();
+                }
+                return idx < list.size();
+            }
+
+            @Override
+            public T next() {
+                return list.get(idx);
+            }
+        };
+    }
+
+    public static<T> Iterable<T> tee(List<T> list, int n){
+        int size = 0;
+        for(T word : list){
+            size += word.toString().length();
+        }
+        int totalSize = size;
+        return () -> new Iterator() {
+            int count = -1;
+            int listIdx = 0;
+            int wordIdx = -1;
+            @Override
+            public boolean hasNext() {
+                count++;
+                if(count % totalSize == 0){
+                    listIdx = 0;
+                    wordIdx = -1;
+                }
+                return count < n * totalSize;
+            }
+
+            @Override
+            public String next() {
+                wordIdx++;
+                if(wordIdx >= list.get(listIdx).toString().length()){
+                    wordIdx = 0;
+                    listIdx++;
+                }
+                return Character.toString(list.get(listIdx).toString().charAt(wordIdx));
+            }
+        };
+    }
+
+    public static List<String> zipLongest(List<String> listA, List<String> listB, String fillValue){
+        if(listA.size() == 0){
+            throw new IllegalArgumentException("The listA size must be greater than 0.");
+        }
+
+        if(listA.size() < listB.size()){
+            throw new IllegalArgumentException("The listA size must be greater than listB size.");
+        }
+
+        List<String> result = new ArrayList<>();
+        for(int i = 0; i < listA.size(); i++){
+            if(i < listB.size()){
+                result.add(listA.get(i)+listB.get(i));
+            } else {
+                result.add(listA.get(i)+fillValue);
+            }
+        }
+        return result;
+    }
+
+    public static List<String> zipLongest(List<String> listA, String fillValue){
+        if(listA.size() == 0){
+            throw new IllegalArgumentException("The listA size must be greater than 0.");
+        }
+
+        List<String> result = new ArrayList<>();
+        for(int i = 0; i < listA.size(); i++){
+            result.add(listA.get(i)+fillValue);
+        }
+        return result;
+    }
 }
