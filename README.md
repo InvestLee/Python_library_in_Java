@@ -25,7 +25,7 @@
   - insort_right(a, x, lo=0, hi=len(a))
 
 ## 설치 방법
-### build.gralde
+### Gralde
 ```
 dependencyResolutionManagement {
 	repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
@@ -40,7 +40,7 @@ dependencies {
 }
 ```
 
-###
+### Maven
 ```
 <repositories>
 	<repository>
