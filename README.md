@@ -27,31 +27,31 @@
 ## 설치 방법
 ### build.gralde
 ```
-	dependencyResolutionManagement {
-		repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-		repositories {
-			mavenCentral()
-			maven { url 'https://jitpack.io' }
-		}
+dependencyResolutionManagement {
+	repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+	repositories {
+		mavenCentral()
+		maven { url 'https://jitpack.io' }
 	}
+}
 
 dependencies {
-	        implementation 'com.github.InvestLee:Python_library_in_Java:Tag'
+	implementation 'com.github.InvestLee:Python_library_in_Java:Tag'
 }
 ```
 
 ###
 ```
-	<repositories>
-		<repository>
-		    <id>jitpack.io</id>
-		    <url>https://jitpack.io</url>
-		</repository>
-	</repositories>
+<repositories>
+	<repository>
+	    <id>jitpack.io</id>
+	    <url>https://jitpack.io</url>
+	</repository>
+</repositories>
 
-	<dependency>
-	    <groupId>com.github.InvestLee</groupId>
-	    <artifactId>Python_library_in_Java</artifactId>
-	    <version>Tag</version>
-	</dependency>
+<dependency>
+    <groupId>com.github.InvestLee</groupId>
+    <artifactId>Python_library_in_Java</artifactId>
+    <version>Tag</version>
+</dependency>
 ```
