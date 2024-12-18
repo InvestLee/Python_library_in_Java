@@ -21,7 +21,5 @@
 - bisect 라이브러리
   - bisect_left(a, x, lo=0, hi=len(a))
   - bisect_right(a, x, lo=0, hi=len(a))
-  - bisect(a, x, lo=0, hi=len(a))
   - insort_left(a, x, lo=0, hi=len(a))
   - insort_right(a, x, lo=0, hi=len(a))
-  - insort(a, x, lo=0, hi=len(a))
