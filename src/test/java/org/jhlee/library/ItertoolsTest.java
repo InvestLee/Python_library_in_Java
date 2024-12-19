@@ -3,6 +3,7 @@ package org.jhlee.library;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -40,6 +41,13 @@ public class ItertoolsTest {
             assertEquals(l, a);
             l += 1;
             if (l > 20) break;
+        }
+
+        BigDecimal b = new BigDecimal("10");
+        for (BigDecimal a : Itertools.count(new BigDecimal("10"), new BigDecimal("1"))) {
+            assertEquals(b, a);
+            b = b.add(new BigDecimal("1"));
+            if (b.compareTo(new BigDecimal("20")) > 0) break;
         }
     }
 
