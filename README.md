@@ -4,8 +4,8 @@
 
 |Method|매개변수|반환값|예시|
 |------|---|---|---|
-|count|start, [step]|Post|/survey/register|
-|cycle|p|Post|/survey/update|
+|count|start, step|start, start+step, start+2*step, …|count(10,1) --> 10 11 12 13 14 ...|
+|cycle|list|list.get(0), list.get(1), ... list.get(list.size()-1),list.get(0), list.get(1), ...|cycle(["A","B","C","D"]) --> A B C D A B C D ...|
 |repeat|elem [,n]|Post|/survey/reply|
 |accumulate|p [,func]|Post|/survey/find/replyAll|
 |chain|p, q, …|Post|/survey/find|
