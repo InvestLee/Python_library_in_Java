@@ -1,23 +1,27 @@
 파이썬 라이브러리에만 있는 itertools, bisect를 자바에도 구현해보는 오픈 라이브러리입니다.
 
 - itertools 라이브러리
-  - count(start, [step])
-  - cycle(p)
-  - repeat(elem [,n])
-  - accumulate(p [,func])
-  - chain(p, q, …)
-  - compress(data, selectors)
-  - dropwhile(pred, seq)
-  - filterfalse(pred, seq)
-  - groupby(iterable[, key])
-  - islice(seq, [start,] stop [, step])
-  - takewhile(pred, seq)
-  - tee(it, n)
-  - zip_longest(p, q, …)
-  - product(p, q, … [repeat=1])
-  - permutations(p[, r])
-  - combinations(p, r)
-  - combinations_with_replacement(p, r)
+
+|Method|매개변수|반환값|예시|
+|------|---|---|---|
+|count|start, [step]|Post|/survey/register|
+|cycle|p|Post|/survey/update|
+|repeat|elem [,n]|Post|/survey/reply|
+|accumulate|p [,func]|Post|/survey/find/replyAll|
+|chain|p, q, …|Post|/survey/find|
+|compress|data, selectors|Get|/survey/find/baseAll|
+|dropwhile|pred, seq|Post|/survey/delete|
+|filterfalse|pred, seq|Post|/survey/delete|
+|groupby|iterable[, key]|Post|/survey/delete|
+|islice|seq, [start,] stop [, step]|Post|/survey/delete|
+|takewhile|pred, seq|Post|/survey/delete|
+|tee|it, n|Post|/survey/delete|
+|zip_longest|p, q, …|Post|/survey/delete|
+|product|p, q, … [repeat=1]|Post|/survey/delete|
+|permutations|p[, r]|Post|/survey/delete|
+|combinations|p, r|Post|/survey/delete|
+|combinations_with_replacement|p, r|Post|/survey/delete|
+
 - bisect 라이브러리
   - bisect_left(a, x, lo=0, hi=len(a))
   - bisect_right(a, x, lo=0, hi=len(a))
