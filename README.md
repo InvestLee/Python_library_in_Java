@@ -6,10 +6,14 @@
 |------|---|---|---|
 |count|start, step|start, start+step, start+2*step, …|count(10,1) --> 10 11 12 13 14 ...|
 |cycle|list|list.get(0), list.get(1), ... list.get(list.size()-1),list.get(0), list.get(1), ...|cycle(["A","B","C","D"]) --> A B C D A B C D ...|
-|repeat|elem [,n]|Post|/survey/reply|
-|accumulate|p [,func]|Post|/survey/find/replyAll|
-|chain|p, q, …|Post|/survey/find|
-|compress|data, selectors|Get|/survey/find/baseAll|
+|repeat|obj, times|obj, obj, obj, .... times만큼 반복|repeat(10, 3) --> 10 10 10|
+|accumulatePlus|list, initial|initial, initial + list.get(0), initial + list.get(0) + list.get(1)...|accumulatePlus([1,2,3,4,5], 0) --> 0 1 3 6 10 15|
+|accumulateMinus|list, initial|initial, initial - list.get(0), initial - list.get(0) - list.get(1)...|accumulateMinus([1,2,3,4,5], 0) --> 0 -1 -3 -6 -10 -15|
+|accumulateMultiply|list, initial|initial, initial * list.get(0), initial * list.get(0) * list.get(1)...|accumulateMultiply([1,2,3,4,5], 1) --> 1 1 2 6 24 120|
+|accumulateDivide|list, initial|initial, initial / list.get(0), initial / list.get(0) / list.get(1)...|accumulateDivide([5,4,3,2,1], 120) --> 120 24 6 2 1 1|
+|accumulateRemain|list, initial|initial, initial % list.get(0), initial % list.get(0) % list.get(1)...|accumulateRemain([100,10,1], 123) --> 123 23 3 0|
+|chain|list|list.get(0).charAt(0), list.get(0).charAt(1) ... list.get(list.size()-1).charAt(list.get(list.size()-1).length()-1) |chain(["ABC", "DEF"]) --> A B C D E F|
+|compress|list, selectors|(list[0] if selectors[0]), (list[1] if selectors[1]), …|compress(["A","B","C","D","E","F"], [true,false,true,false,true,true]) --> A C E F|
 |dropwhile|pred, seq|Post|/survey/delete|
 |filterfalse|pred, seq|Post|/survey/delete|
 |groupby|iterable[, key]|Post|/survey/delete|
