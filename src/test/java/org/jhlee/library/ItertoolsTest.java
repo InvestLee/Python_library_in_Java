@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ItertoolsTest {
 
@@ -81,6 +82,8 @@ public class ItertoolsTest {
         comp2.add(Arrays.asList(2,0,1));
         comp2.add(Arrays.asList(2,1,0));
         assertEquals(comp2, result2);
+
+        assertThrows(IllegalArgumentException.class, () -> Itertools.permutations(arr,5));
     }
 
     @Test
@@ -105,6 +108,8 @@ public class ItertoolsTest {
         comp2.add(Arrays.asList(0,2,3));
         comp2.add(Arrays.asList(1,2,3));
         assertEquals(comp2, result2);
+
+        assertThrows(IllegalArgumentException.class, () -> Itertools.combinations(arr,5));
     }
 
     @Test
@@ -120,6 +125,10 @@ public class ItertoolsTest {
         comp.add(Arrays.asList("B","C"));
         comp.add(Arrays.asList("C","C"));
         assertEquals(comp, result);
+
+        List<String> arr3 = new ArrayList<>();
+        assertThrows(IllegalArgumentException.class, () -> Itertools.combinationsWithReplacement(arr,0));
+        assertThrows(IllegalArgumentException.class, () -> Itertools.combinationsWithReplacement(arr3,2));
     }
 
     @Test
@@ -281,6 +290,10 @@ public class ItertoolsTest {
         List<String> result = Itertools.compress(arr,selectors);
         List<String> comp = new ArrayList<>(Arrays.asList("A","C","E","F"));
         assertEquals(comp, result);
+
+        List<String> arr2 = new ArrayList<>(Arrays.asList("A","B","C","D","E","F"));
+        boolean[] selectors2 = {true,false,true,false,true};
+        assertThrows(IllegalArgumentException.class, () -> Itertools.compress(arr2,selectors2));
     }
 
     @Test
@@ -293,6 +306,9 @@ public class ItertoolsTest {
             count++;
             if(count > 10) break;
         }
+
+        List<String> arr2 = new ArrayList<>();
+        assertThrows(IllegalArgumentException.class, () -> Itertools.cycle(arr2));
     }
 
     @Test
@@ -305,6 +321,9 @@ public class ItertoolsTest {
             assertEquals(comp[idx], result);
             idx++;
         }
+
+        List<Integer> arr2 = new ArrayList<>();
+        assertThrows(IllegalArgumentException.class, () -> Itertools.dropWhile(integer -> (integer < 5),arr2));
     }
 
     @Test
@@ -317,6 +336,9 @@ public class ItertoolsTest {
             assertEquals(comp[idx], result);
             idx++;
         }
+
+        List<Integer> arr2 = new ArrayList<>();
+        assertThrows(IllegalArgumentException.class, () -> Itertools.filterFalse(integer -> (integer % 2 == 0),arr2));
     }
 
     @Test
@@ -331,6 +353,9 @@ public class ItertoolsTest {
         List<Integer> result2 = Itertools.groupBy(arr2);
         List<Integer> comp2 = new ArrayList<>(Arrays.asList(0,1,2,3,1));
         assertEquals(comp2, result2);
+
+        List<Integer> arr3 = new ArrayList<>();
+        assertThrows(IllegalArgumentException.class, () -> Itertools.groupBy(arr3));
     }
 
     @Test
@@ -352,6 +377,9 @@ public class ItertoolsTest {
         result = Itertools.iSlice(arr,0,arr.size(),2);
         comp = new ArrayList<>(Arrays.asList("A","C","E","G"));
         assertEquals(comp, result);
+
+        List<String> arr2 = new ArrayList<>();
+        assertThrows(IllegalArgumentException.class, () -> Itertools.iSlice(arr2, 0, arr.size(), 1));
     }
 
     @Test
@@ -364,6 +392,14 @@ public class ItertoolsTest {
         List<String> result2 = Itertools.product(Arrays.asList("0","1"), 3);
         List<String> comp2 = new ArrayList<>(Arrays.asList("000", "001", "010", "011", "100", "101", "110", "111"));
         assertEquals(comp2, result2);
+
+        List<String> arr1 = new ArrayList<>();
+        List<String> arr2 = new ArrayList<>();
+        List<String> arr3 = new ArrayList<>(Arrays.asList("A","B","C","D"));
+        assertThrows(IllegalArgumentException.class, () -> Itertools.product(arr1, 3));
+        assertThrows(IllegalArgumentException.class, () -> Itertools.product(arr1, arr2));
+        assertThrows(IllegalArgumentException.class, () -> Itertools.product(arr3, arr2));
+        assertThrows(IllegalArgumentException.class, () -> Itertools.product(arr1, arr3));
     }
 
     @Test
@@ -385,6 +421,9 @@ public class ItertoolsTest {
             assertEquals(comp[idx], result);
             idx++;
         }
+
+        List<Integer> arr2 = new ArrayList<>();
+        assertThrows(IllegalArgumentException.class, () -> Itertools.takeWhile(integer -> (integer < 5),arr2));
     }
 
     @Test
@@ -409,5 +448,12 @@ public class ItertoolsTest {
         List<String> result2 = Itertools.zipLongest(Arrays.asList("A","B","C","D"), "-");
         List<String> comp2 = new ArrayList<>(Arrays.asList("A-", "B-", "C-", "D-"));
         assertEquals(comp2, result2);
+
+        List<String> arr = new ArrayList<>();
+        List<String> arr2 = new ArrayList<>(Arrays.asList("A","B","C","D"));
+        List<String> arr3 = new ArrayList<>(Arrays.asList("x","y"));
+        assertThrows(IllegalArgumentException.class, () -> Itertools.zipLongest(arr, "-"));
+        assertThrows(IllegalArgumentException.class, () -> Itertools.zipLongest(arr, arr2,"-"));
+        assertThrows(IllegalArgumentException.class, () -> Itertools.zipLongest(arr3, arr2, "-"));
     }
 }

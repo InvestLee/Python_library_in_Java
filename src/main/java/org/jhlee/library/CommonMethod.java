@@ -30,6 +30,28 @@ public class CommonMethod {
         }
     }
 
+    public static <N extends Number> List<N> accumulate(List<N> list, N initial, BiFunction<Number, Number, Number> operation) {
+        if (!(initial instanceof Number)) {
+            throw new IllegalArgumentException("The initial value must be a number.");
+        }
+
+        List<N> result = new ArrayList<>(list.size() + 1);
+        result.add(initial);
+
+        Number acc = initial;
+
+        for (Number value : list) {
+            if (!(value instanceof Number)) {
+                throw new IllegalArgumentException("The list value must be a number.");
+            }
+
+            acc = applyOperation(acc, value, operation);
+            result.add(castToType(acc, initial));
+        }
+
+        return result;
+    }
+
     public static Number applyOperation(Number acc, Number value, BiFunction<Number, Number, Number> operation) {
         if (acc instanceof BigDecimal || value instanceof BigDecimal) {
             BigDecimal accBigDecimal = new BigDecimal(acc.toString());
@@ -69,12 +91,6 @@ public class CommonMethod {
             return ((BigDecimal) current).add((BigDecimal) step);
         }
         return current.doubleValue() + step.doubleValue();
-    }
-
-    public static <T> List<List<T>> createErrorList(String errorMessage) {
-        List<List<T>> errorList = new ArrayList<>();
-        errorList.add((List<T>) Arrays.asList((T) errorMessage));
-        return errorList;
     }
 
     public static int[] initializeIndices(int size) {

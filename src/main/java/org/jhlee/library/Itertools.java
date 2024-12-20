@@ -38,28 +38,6 @@ public class Itertools {
         };
     }
 
-    public static <N extends Number> List<N> accumulate(List<N> list, N initial, BiFunction<Number, Number, Number> operation) {
-        if (!(initial instanceof Number)) {
-            throw new IllegalArgumentException("The initial value must be a number.");
-        }
-
-        List<N> result = new ArrayList<>(list.size() + 1);
-        result.add(initial);
-
-        Number acc = initial;
-
-        for (Number value : list) {
-            if (!(value instanceof Number)) {
-                throw new IllegalArgumentException("The list value must be a number.");
-            }
-
-            acc = applyOperation(acc, value, operation);
-            result.add(castToType(acc, initial));
-        }
-
-        return result;
-    }
-
     public static <N extends Number> List<N> accumulatePlus(List<N> list, N initial) {
         return accumulate(list, initial, (a, b) -> {
             if (a instanceof BigDecimal && b instanceof BigDecimal) {
@@ -107,7 +85,7 @@ public class Itertools {
 
     public static <T> List<List<T>> permutations(List<T> list, int r) {
         if (r > list.size()) {
-            return createErrorList("The list size must be greater than or equal to r.");
+            throw new IllegalArgumentException("The list size must be greater than or equal to r.");
         }
 
         int n = list.size();
@@ -139,7 +117,7 @@ public class Itertools {
 
     public static <T> List<List<T>> combinations(List<T> list, int r) {
         if (r > list.size()) {
-            return createErrorList("The list size must be greater than or equal to r.");
+            throw new IllegalArgumentException("The list size must be greater than or equal to r.");
         }
 
         int[] indices = initializeIndices(r);
@@ -167,7 +145,7 @@ public class Itertools {
 
     public static <T> List<List<T>> combinationsWithReplacement(List<T> list, int r) {
         if (r < 1 || list.isEmpty()) {
-            return createErrorList("The list size and r must be greater than 0.");
+            throw new IllegalArgumentException("The list size and r must be greater than 0.");
         }
 
         int[] indices = new int[r];

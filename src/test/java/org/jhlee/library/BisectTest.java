@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BisectTest {
 
@@ -25,6 +26,9 @@ public class BisectTest {
         assertEquals(2, Bisect.bisectLeft(arr,0,2,8));
         assertEquals(4, Bisect.bisectLeft(arr,50,2,8));
         assertEquals(8, Bisect.bisectLeft(arr,100,2,8));
+
+        assertThrows(IllegalArgumentException.class, () -> Bisect.bisectLeft(arr,0,-1,8));
+        assertThrows(IllegalArgumentException.class, () -> Bisect.bisectLeft(arr,0,2,11));
     }
 
     @Test
@@ -41,6 +45,9 @@ public class BisectTest {
         assertEquals(2, Bisect.bisectRight(arr,0,2,8));
         assertEquals(5, Bisect.bisectRight(arr,50,2,8));
         assertEquals(8, Bisect.bisectRight(arr,100,2,8));
+
+        assertThrows(IllegalArgumentException.class, () -> Bisect.bisectLeft(arr,0,-1,8));
+        assertThrows(IllegalArgumentException.class, () -> Bisect.bisectLeft(arr,0,2,11));
     }
 
     @Test
@@ -58,6 +65,9 @@ public class BisectTest {
         assertEquals(Arrays.asList(10, 20, 30, 30, 40, 50), Bisect.insortLeft(arr,30,1,4));
         assertEquals(Arrays.asList(10, 20, 30, 40, 50, 50), Bisect.insortLeft(arr,50,1,4));
         assertEquals(Arrays.asList(10, 20, 30, 40, 100, 50), Bisect.insortLeft(arr,100,1,4));
+
+        assertThrows(IllegalArgumentException.class, () -> Bisect.bisectLeft(arr,0,-1,4));
+        assertThrows(IllegalArgumentException.class, () -> Bisect.bisectLeft(arr,0,2,6));
     }
 
     @Test
@@ -75,5 +85,8 @@ public class BisectTest {
         assertEquals(Arrays.asList(10, 20, 30, 30, 40, 50), Bisect.insortRight(arr,30,1,4));
         assertEquals(Arrays.asList(10, 20, 30, 40, 50, 50), Bisect.insortRight(arr,50,1,4));
         assertEquals(Arrays.asList(10, 20, 30, 40, 100, 50), Bisect.insortRight(arr,100,1,4));
+
+        assertThrows(IllegalArgumentException.class, () -> Bisect.bisectLeft(arr,0,-1,4));
+        assertThrows(IllegalArgumentException.class, () -> Bisect.bisectLeft(arr,0,2,6));
     }
 }
