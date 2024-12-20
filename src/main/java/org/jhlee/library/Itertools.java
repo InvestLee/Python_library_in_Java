@@ -5,7 +5,7 @@ import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
 
-import static org.jhlee.library.CommonMethod.castToType;
+import static org.jhlee.library.CommonMethod.*;
 
 
 public class Itertools {
@@ -60,18 +60,6 @@ public class Itertools {
         return result;
     }
 
-
-
-    private static Number applyOperation(Number acc, Number value, BiFunction<Number, Number, Number> operation) {
-        if (acc instanceof BigDecimal || value instanceof BigDecimal) {
-            BigDecimal accBigDecimal = new BigDecimal(acc.toString());
-            BigDecimal valueBigDecimal = new BigDecimal(value.toString());
-            return operation.apply(accBigDecimal, valueBigDecimal);
-        }
-
-        return operation.apply(acc, value);
-    }
-
     public static <N extends Number> List<N> accumulatePlus(List<N> list, N initial) {
         return accumulate(list, initial, (a, b) -> {
             if (a instanceof BigDecimal && b instanceof BigDecimal) {
@@ -117,113 +105,91 @@ public class Itertools {
         });
     }
 
-    public static<T> List<List<T>> permutations(List<T> list, int r){
-        int n = list.size();
-        if(r > n){
-            List<List<T>> mistake = new ArrayList<>();
-            mistake.add((List<T>) new ArrayList<>(Arrays.asList("The list size must be greater than r.")));
-            return mistake;
+    public static <T> List<List<T>> permutations(List<T> list, int r) {
+        if (r > list.size()) {
+            return createErrorList("The list size must be greater than or equal to r.");
         }
-        int[] indices = new int[n];
-        for(int i = 0; i < n; i++) indices[i] = i;
-        int[] cycles = new int[r];
-        for(int i = 0; i < r; i++) cycles[i] = n - i;
+
+        int n = list.size();
+        int[] indices = initializeIndices(n);
+        int[] cycles = initializeCycles(r, n);
+
         List<List<T>> result = new ArrayList<>();
-        List<T> element = new ArrayList<>();
-        for(int i = 0; i < r; i++)  element.add(list.get(indices[i]));
-        result.add(element);
-        boolean flag = true;
-        while(flag){
-            for(int i = r-1; i >= 0; i--){
+        addCurrentPermutation(result, list, indices, r);
+
+        while (true) {
+            boolean done = true;
+            for (int i = r - 1; i >= 0; i--) {
                 cycles[i]--;
-                if(cycles[i] == 0){
-                    int[] indicesTemp = indices.clone();
-                    int idx = i;
-                    for(int j = i+1; j < n; j++){
-                        indices[idx] = indicesTemp[j];
-                        idx++;
-                    }
-                    for(int j = i; j < i+1; j++){
-                        indices[idx] = indicesTemp[j];
-                        idx++;
-                    }
+                if (cycles[i] == 0) {
+                    rotateLeft(indices, i, n);
                     cycles[i] = n - i;
-                    if(i==0) flag = false;
-                }
-                else {
-                    int temp = indices[i];
-                    indices[i] = indices[n-cycles[i]];
-                    indices[n-cycles[i]] = temp;
-                    element = new ArrayList<>();
-                    for(int j = 0; j < r; j++)  element.add(list.get(indices[j]));
-                    result.add(element);
+                } else {
+                    swap(indices, i, n - cycles[i]);
+                    addCurrentPermutation(result, list, indices, r);
+                    done = false;
                     break;
                 }
             }
+            if (done) break;
         }
+
         return result;
     }
 
-    public static<T> List<List<T>> combinations(List<T> list, int r){
-        int n = list.size();
-        if(r > n){
-            List<List<T>> mistake = new ArrayList<>();
-            mistake.add((List<T>) new ArrayList<>(Arrays.asList("The list size must be greater than r.")));
-            return mistake;
+    public static <T> List<List<T>> combinations(List<T> list, int r) {
+        if (r > list.size()) {
+            return createErrorList("The list size must be greater than or equal to r.");
         }
-        int[] indices = new int[r];
-        for(int i = 0; i < r; i++) indices[i] = i;
+
+        int[] indices = initializeIndices(r);
         List<List<T>> result = new ArrayList<>();
-        List<T> element = new ArrayList<>();
-        for(int i = 0; i < r; i++)  element.add(list.get(indices[i]));
-        result.add(element);
-        boolean flag = true;
-        while(flag){
-            for(int i = r-1; i >= 0; i--){
-                if(indices[i] != i + n - r){
+        addCurrentCombination(result, list, indices);
+
+        while (true) {
+            boolean done = true;
+            for (int i = r - 1; i >= 0; i--) {
+                if (indices[i] < i + list.size() - r) {
                     indices[i]++;
-                    for(int j = i+1; j < r; j++){
-                        indices[j] = indices[j-1] + 1;
+                    for (int j = i + 1; j < r; j++) {
+                        indices[j] = indices[j - 1] + 1;
                     }
-                    element = new ArrayList<>();
-                    for(int j = 0; j < r; j++)  element.add(list.get(indices[j]));
-                    result.add(element);
+                    addCurrentCombination(result, list, indices);
+                    done = false;
                     break;
                 }
-                if(i == 0) flag = false;
             }
+            if (done) break;
         }
+
         return result;
     }
 
-    public static<T> List<List<T>> combinationsWithReplacement(List<T> list, int r){
-        int n = list.size();
-        if(r < 1 || n < 1){
-            List<List<T>> mistake = new ArrayList<>();
-            mistake.add((List<T>) new ArrayList<>(Arrays.asList("list size and r must be greater than 0.")));
-            return mistake;
+    public static <T> List<List<T>> combinationsWithReplacement(List<T> list, int r) {
+        if (r < 1 || list.isEmpty()) {
+            return createErrorList("The list size and r must be greater than 0.");
         }
+
         int[] indices = new int[r];
         List<List<T>> result = new ArrayList<>();
-        List<T> element = new ArrayList<>();
-        for(int i = 0; i < r; i++)  element.add(list.get(indices[i]));
-        result.add(element);
-        boolean flag = true;
-        while(flag){
-            for(int i = r-1; i >= 0; i--){
-                if(indices[i] != n - 1){
-                    int next = indices[i]+1;
-                    for(int j = i; j < r; j++){
+        addCurrentCombination(result, list, indices);
+
+        while (true) {
+            boolean done = true;
+            for (int i = r - 1; i >= 0; i--) {
+                if (indices[i] < list.size() - 1) {
+                    int next = indices[i] + 1;
+                    for (int j = i; j < r; j++) {
                         indices[j] = next;
                     }
-                    element = new ArrayList<>();
-                    for(int j = 0; j < r; j++)  element.add(list.get(indices[j]));
-                    result.add(element);
+                    addCurrentCombination(result, list, indices);
+                    done = false;
                     break;
                 }
-                if(i == 0) flag = false;
             }
+            if (done) break;
         }
+
         return result;
     }
 
@@ -252,37 +218,6 @@ public class Itertools {
         }
 
         throw new IllegalArgumentException("Unsupported number type: " + clazz.getName());
-    }
-
-    private static <N extends Number> Iterable<N> createIterator(N start, N step) {
-        return () -> new Iterator<>() {
-            N current = castToType(initialValue(start, step), start);
-
-            @Override
-            public boolean hasNext() {
-                return true;
-            }
-
-            @Override
-            public N next() {
-                current = castToType(nextValue(current, step), start);
-                return current;
-            }
-        };
-    }
-
-    private static Number initialValue(Number start, Number step) {
-        if (start instanceof BigDecimal && step instanceof BigDecimal) {
-            return ((BigDecimal) start).subtract((BigDecimal) step);
-        }
-        return start.doubleValue() - step.doubleValue();
-    }
-
-    private static Number nextValue(Number current, Number step) {
-        if (current instanceof BigDecimal && step instanceof BigDecimal) {
-            return ((BigDecimal) current).add((BigDecimal) step);
-        }
-        return current.doubleValue() + step.doubleValue();
     }
 
     public static<T> Iterable<T> cycle(List<T> list){
