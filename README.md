@@ -39,12 +39,8 @@
 ## 설치 방법
 ### Gralde
 ```
-dependencyResolutionManagement {
-	repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-	repositories {
-		mavenCentral()
-		maven { url 'https://jitpack.io' }
-	}
+repositories {
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -55,10 +51,10 @@ dependencies {
 ### Maven
 ```
 <repositories>
-	<repository>
-	    <id>jitpack.io</id>
-	    <url>https://jitpack.io</url>
-	</repository>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
 </repositories>
 
 <dependency>
