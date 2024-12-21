@@ -48,7 +48,7 @@ dependencyResolutionManagement {
 }
 
 dependencies {
-	implementation 'com.github.InvestLee:Python_library_in_Java:Tag'
+	implementation 'com.github.InvestLee:Python_library_in_Java:1.1.0'
 }
 ```
 
@@ -64,7 +64,7 @@ dependencies {
 <dependency>
     <groupId>com.github.InvestLee</groupId>
     <artifactId>Python_library_in_Java</artifactId>
-    <version>Tag</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 

@@ -1,2 +1,3 @@
 rootProject.name = 'Python_library_in_Java'
+include 'example'
 
