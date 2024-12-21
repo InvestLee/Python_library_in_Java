@@ -1,6 +1,5 @@
 package org.jhlee.library;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +13,7 @@ public class Bisect {
         }
 
         while (low < high) {
-            int mid = (low + high) >>> 1; // 안전한 중간값 계산
+            int mid = (low + high) >>> 1;
             T midValue = arr.get(mid);
 
             if (midValue.compareTo(x) < 0) {
@@ -32,7 +31,7 @@ public class Bisect {
         int high = arr.size();
 
         while (low < high) {
-            int mid = (low + high) >>> 1; // 안전한 중간값 계산
+            int mid = (low + high) >>> 1;
             T midValue = arr.get(mid);
 
             if (midValue.compareTo(x) < 0) {
@@ -54,7 +53,7 @@ public class Bisect {
         }
 
         while (low < high) {
-            int mid = (low + high) >>> 1; // 안전한 중간값 계산
+            int mid = (low + high) >>> 1;
             T midValue = arr.get(mid);
 
             if (midValue.compareTo(x) > 0) {
@@ -72,7 +71,7 @@ public class Bisect {
         int high = arr.size();
 
         while (low < high) {
-            int mid = (low + high) >>> 1; // 안전한 중간값 계산
+            int mid = (low + high) >>> 1;
             T midValue = arr.get(mid);
 
             if (midValue.compareTo(x) > 0) {

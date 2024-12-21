@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class ItertoolsTest {
 
     @Test
-    @DisplayName("count 함수")
+    @DisplayName("count test")
     public void countTest() {
         int i = 10;
         for (int a : Itertools.count(10, 1)) {
@@ -53,7 +53,7 @@ public class ItertoolsTest {
     }
 
     @Test
-    @DisplayName("permutation 함수")
+    @DisplayName("permutation test")
     public void permutationTest() {
         List<String> arr = new ArrayList<>(Arrays.asList("A","B","C","D"));
         List<List<String>> result = Itertools.permutations(arr,2);
@@ -87,7 +87,7 @@ public class ItertoolsTest {
     }
 
     @Test
-    @DisplayName("combination 함수")
+    @DisplayName("combination test")
     public void combinationTest() {
         List<String> arr = new ArrayList<>(Arrays.asList("A","B","C","D"));
         List<List<String>> result = Itertools.combinations(arr,2);
@@ -113,7 +113,7 @@ public class ItertoolsTest {
     }
 
     @Test
-    @DisplayName("combinationsWithReplacement 함수")
+    @DisplayName("combinationsWithReplacement test")
     public void combinationsWithReplacementTest() {
         List<String> arr = new ArrayList<>(Arrays.asList("A","B","C"));
         List<List<String>> result = Itertools.combinationsWithReplacement(arr,2);
@@ -132,7 +132,7 @@ public class ItertoolsTest {
     }
 
     @Test
-    @DisplayName("accumulatePlus 함수")
+    @DisplayName("accumulatePlus test")
     public void accumulatePlusTest() {
         List<Integer> arr = new ArrayList<>(Arrays.asList(1,2,3,4,5));
         List<Integer> result = Itertools.accumulatePlus(arr,0);
@@ -161,7 +161,7 @@ public class ItertoolsTest {
     }
 
     @Test
-    @DisplayName("accumulateMultiply 함수")
+    @DisplayName("accumulateMultiply test")
     public void accumulateMultiplyTest() {
         List<Integer> arr = new ArrayList<>(Arrays.asList(1,2,3,4,5));
         List<Integer> result = Itertools.accumulateMultiply(arr,1);
@@ -190,7 +190,7 @@ public class ItertoolsTest {
     }
 
     @Test
-    @DisplayName("accumulateMinus 함수")
+    @DisplayName("accumulateMinus test")
     public void accumulateMinusTest() {
         List<Integer> arr = new ArrayList<>(Arrays.asList(1,2,3,4,5));
         List<Integer> result = Itertools.accumulateMinus(arr,0);
@@ -219,7 +219,7 @@ public class ItertoolsTest {
     }
 
     @Test
-    @DisplayName("accumulateDivide 함수")
+    @DisplayName("accumulateDivide test")
     public void accumulateDivideTest() {
         List<Integer> arr = new ArrayList<>(Arrays.asList(5,4,3,2,1));
         List<Integer> result = Itertools.accumulateDivide(arr,120);
@@ -243,7 +243,7 @@ public class ItertoolsTest {
     }
 
     @Test
-    @DisplayName("accumulateRemain 함수")
+    @DisplayName("accumulateRemain test")
     public void accumulateRemainTest() {
         List<Integer> arr = new ArrayList<>(Arrays.asList(5,4,3,2,1));
         List<Integer> result = Itertools.accumulateRemain(arr,120);
@@ -272,7 +272,7 @@ public class ItertoolsTest {
     }
 
     @Test
-    @DisplayName("chain 함수")
+    @DisplayName("chain test")
     public void chainTest() {
         List<String> arr = new ArrayList<>(Arrays.asList("ABC","DEFG"));
         char comp = 'A';
@@ -283,7 +283,7 @@ public class ItertoolsTest {
     }
 
     @Test
-    @DisplayName("compress 함수")
+    @DisplayName("compress test")
     public void compressTest() {
         List<String> arr = new ArrayList<>(Arrays.asList("A","B","C","D","E","F"));
         boolean[] selectors = {true,false,true,false,true,true};
@@ -297,7 +297,7 @@ public class ItertoolsTest {
     }
 
     @Test
-    @DisplayName("cycle 함수")
+    @DisplayName("cycle test")
     public void cycleTest() {
         List<String> arr = new ArrayList<>(Arrays.asList("A","B","C","D"));
         int count = 0;
@@ -312,7 +312,7 @@ public class ItertoolsTest {
     }
 
     @Test
-    @DisplayName("dropWhile 함수")
+    @DisplayName("dropWhile test")
     public void dropWhileTest() {
         List<Integer> arr = new ArrayList<>(Arrays.asList(1,4,6,4,1));
         int[] comp = {6,4,1};
@@ -327,7 +327,7 @@ public class ItertoolsTest {
     }
 
     @Test
-    @DisplayName("filterFalse 함수")
+    @DisplayName("filterFalse test")
     public void filterFalseTest() {
         List<Integer> arr = new ArrayList<>(Arrays.asList(0,1,2,3,4,5,6,7,8,9));
         int[] comp = {0,2,4,6,8};
@@ -342,7 +342,7 @@ public class ItertoolsTest {
     }
 
     @Test
-    @DisplayName("groupBy 함수")
+    @DisplayName("groupBy test")
     public void groupByTest() {
         List<String> arr = new ArrayList<>(Arrays.asList("A","A","A","A","B","B","B","C","C","D","B"));
         List<String> result = Itertools.groupBy(arr);
@@ -359,7 +359,7 @@ public class ItertoolsTest {
     }
 
     @Test
-    @DisplayName("iSlice 함수")
+    @DisplayName("iSlice test")
     public void iSliceTest() {
         List<String> arr = new ArrayList<>(Arrays.asList("A","B","C","D","E","F","G"));
         List<String> result = Itertools.iSlice(arr,0,2,1);
@@ -383,7 +383,7 @@ public class ItertoolsTest {
     }
 
     @Test
-    @DisplayName("product 함수")
+    @DisplayName("product test")
     public void productTest() {
         List<String> result = Itertools.product(Arrays.asList("A","B","C","D"), Arrays.asList("x","y"));
         List<String> comp = new ArrayList<>(Arrays.asList("Ax", "Ay", "Bx", "By", "Cx", "Cy", "Dx", "Dy"));
@@ -403,7 +403,7 @@ public class ItertoolsTest {
     }
 
     @Test
-    @DisplayName("repeat 함수")
+    @DisplayName("repeat test")
     public void repeatTest() {
         int  comp= 10;
         for (int result : Itertools.repeat(10, 3)) {
@@ -412,7 +412,7 @@ public class ItertoolsTest {
     }
 
     @Test
-    @DisplayName("takeWhile 함수")
+    @DisplayName("takeWhile test")
     public void takeWhileTest() {
         List<Integer> arr = new ArrayList<>(Arrays.asList(1,4,6,4,1));
         int[] comp = {1,4};
@@ -427,7 +427,7 @@ public class ItertoolsTest {
     }
 
     @Test
-    @DisplayName("tee 함수")
+    @DisplayName("tee test")
     public void teeTest() {
         List<String> arr = new ArrayList<>(Arrays.asList("ABC","DEFG"));
         char comp = 'A';
@@ -439,7 +439,7 @@ public class ItertoolsTest {
     }
 
     @Test
-    @DisplayName("zipLongest 함수")
+    @DisplayName("zipLongest test")
     public void zipLongestTest() {
         List<String> result = Itertools.zipLongest(Arrays.asList("A","B","C","D"), Arrays.asList("x","y"), "-");
         List<String> comp = new ArrayList<>(Arrays.asList("Ax", "By", "C-", "D-"));

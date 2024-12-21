@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class BisectTest {
 
     @Test
-    @DisplayName("bisectLeft 함수")
+    @DisplayName("bisectLeft test")
     public void bisectLeftTest() {
         List<Integer> arr = new ArrayList<>(Arrays.asList(10, 20, 30, 40, 50, 60, 70, 80, 90, 100));
         assertEquals(0, Bisect.bisectLeft(arr,0));
@@ -32,7 +32,7 @@ public class BisectTest {
     }
 
     @Test
-    @DisplayName("bisectRight 함수")
+    @DisplayName("bisectRight test")
     public void bisectRightTest() {
         List<Integer> arr = new ArrayList<>(Arrays.asList(10, 20, 30, 40, 50, 60, 70, 80, 90, 100));
         assertEquals(0, Bisect.bisectRight(arr,0));
@@ -51,7 +51,7 @@ public class BisectTest {
     }
 
     @Test
-    @DisplayName("insortLeft 함수")
+    @DisplayName("insortLeft test")
     public void insortLeftTest() {
         List<Integer> arr = new ArrayList<>(Arrays.asList(10, 20, 30, 40, 50));
         assertEquals(Arrays.asList(0, 10, 20, 30, 40, 50), Bisect.insortLeft(arr,0));
@@ -71,7 +71,7 @@ public class BisectTest {
     }
 
     @Test
-    @DisplayName("insortRight 함수")
+    @DisplayName("insortRight test")
     public void insortRightTest() {
         List<Integer> arr = new ArrayList<>(Arrays.asList(10, 20, 30, 40, 50));
         assertEquals(Arrays.asList(0, 10, 20, 30, 40, 50), Bisect.insortRight(arr,0));

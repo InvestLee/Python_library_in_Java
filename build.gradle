@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group = 'com.survey'
+group = 'org.jhlee.library'
 version = '1.0-SNAPSHOT'
 
 repositories {
